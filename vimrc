@@ -1,8 +1,12 @@
 """""""""""""""""""""""""""""""""""""
 " Allan MacGregor Vimrc configuration 
 """""""""""""""""""""""""""""""""""""
-" https://dev.to/allanmacgregor/vim-is-the-perfect-ide-e80
-" https://realpython.com/vim-and-python-a-match-made-in-heaven/
+" VIM IDE Setup: https://dev.to/allanmacgregor/vim-is-the-perfect-ide-e80
+" VIM & Python:  https://realpython.com/vim-and-python-a-match-made-in-heaven/
+" Airline Themes: https://github.com/vim-airline/vim-airline/wiki/Screenshots
+" Poweline Fonts: https://github.com/powerline/fonts
+" FuzZyFinder:   https://github.com/junegunn/fzf#usage
+" VIM Dev-Icons: https://giters.com/davidosomething/vim-devicons
 """""""""""""""""""""""""""""""""""""
 set nocompatible
 syntax on
@@ -87,7 +91,6 @@ Plugin 'lambdatoast/elm.vim'
 
 " Theme / Interface
 Plugin 'AnsiEsc.vim'
-Plugin 'ryanoasis/vim-devicons'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'sjl/badwolf'
@@ -106,6 +109,7 @@ Plugin 'effkay/argonaut.vim'
 Plugin 'ajh17/Spacegray.vim'
 Plugin 'atelierbram/Base2Tone-vim'
 Plugin 'colepeters/spacemacs-theme.vim'
+Plugin 'ryanoasis/vim-devicons'
 
 " OSX stupid backspace fix
 set backspace=indent,eol,start
@@ -145,8 +149,19 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-let base16colorspace=256  " Access colors present in 256 colorspace
+" Access colors present in 256 colorspace
+let base16colorspace=256
 colorscheme spacegray
+
+" Enable true color
+" Reference: https://github.com/tmux/tmux/issues/1246
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
+
 " colorscheme spacemacs-theme
 
 let g:spacegray_underline_search = 1
@@ -155,9 +170,61 @@ let g:spacegray_italicize_comments = 1
 " Vim-Airline Configuration
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1 
-let g:airline_theme='hybrid'
+"let g:airline_theme='hybrid'
+let g:airline_theme='monochrome'
 let g:hybrid_custom_term_colors = 1
 let g:hybrid_reduced_contrast = 1 
+
+if has('gui_running')
+   set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Regular
+endif
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.colnr = ' ㏇:'
+let g:airline_symbols.colnr = ' ℅:'
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.linenr = ' ␊:'
+let g:airline_symbols.linenr = ' ␤:'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.maxlinenr = '㏑'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = 'Ɇ'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.colnr = ' :'
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ' :'
+let g:airline_symbols.maxlinenr = '☰ '
+let g:airline_symbols.dirty='⚡'
+
+ " old vim-powerline symbols
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.readonly = '⭤'
+let g:airline_symbols.linenr = '⭡'
 
 " Syntastic Configuration
 set statusline+=%#warningmsg#
@@ -285,7 +352,14 @@ let g:tagbar_type_elixir = {
     \ ]
     \ }
 
+"""""""""""""""""""""""""""""""""""""
 " Fzf Configuration
+"""""""""""""""""""""""""""""""""""""
+" Source a custom configuration file if available
+if filereadable("/usr/share/doc/fzf/examples/fzf.vim")
+    source /usr/share/doc/fzf/examples/fzf.vim
+endif
+
 " This is the default extra key bindings
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
