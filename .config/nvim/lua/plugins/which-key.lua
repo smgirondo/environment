@@ -19,6 +19,8 @@ return {
 			["<leader>f"] = { name = "[F]ile", _ = "which_key_ignore" },
 			["<leader>fe"] = { name = "[F]ile [E]xplorer", _ = "which_key_ignore" },
 			["<leader>fh"] = { name = "[F]ile [H]arpoon", _ = "which_key_ignore" },
+			["<leader>fhb"] = { name = "[F]ile [H]arpoon [B]uffer", _ = "which_key_ignore" },
+			["<leader>fhs"] = { name = "[F]ile [H]arpoon [S]elect", _ = "which_key_ignore" },
 			["<leader>h"] = { name = "[H]elp|[H]ighlight", _ = "which_key_ignore" },
 			["<leader>hl"] = { name = "[H]igh[L]ight", _ = "which_key_ignore" },
 			["<leader>k"] = { name = "[K]eymap(s)", _ = "which_key_ignore" },

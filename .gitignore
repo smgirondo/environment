@@ -1,3 +1,6 @@
+# NVIM Lazy Persistence File
+lazy-lock.json
+
 ## Project excluded content for commits
 *.[ao]
 *.swp
