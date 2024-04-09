@@ -8,14 +8,37 @@
           "background": "#d3d7cf",
           "foreground": "#000000",
           "leading_diamond": "\u256d\u2500\ue0b2",
+          "trailing_diamond": "\ue0b0",
           "style": "diamond",
-          "template": " {{ if .WSL }}WSL at {{ end }}{{.Icon}} ",
+          "template": " {{ if .WSL }}WSL at {{ end }}{{.Icon}}  ",
           "properties": {
             "display_distro_name": false,
             "macos": "mac",
             "linuxmint": "\uF30e"
           },
           "type": "os"
+        },
+        {
+          "background": "#3465a4",
+          "background_templates": [
+            "{{ if eq .OS \"debian\" }}#CD0A51{{ end }}",
+            "{{ if eq .OS \"macos\" }}#24ADF9{{ end }}",
+            "{{ if eq .OS \"mint\" }}#6DB442{{ end }}",
+            "{{ if eq .OS \"linux\" }}#3465a4{{ end }}",
+            "{{ if eq .OS \"linuxmint\" }}#6DB442{{ end }}",
+            "{{ if eq .OS \"redhat\" }}#E70000{{ end }}",
+            "{{ if eq .OS \"ubuntu\" }}#D64613{{ end }}",
+            "{{ if eq .OS \"windows\" }}#0B3DE3{{ end }}"
+          ],
+          "foreground": "#e4e4e4",
+          "__leading_diamond": "\ue0b2",
+          "trailing_diamond": "",
+          "style": "diamond",
+          "__powerline_symbol": "\ue0b0",
+          "__invert_powerline": false,
+          "__style": "powerline",
+          "template": " {{ if .SSHSession }}\ueba9 {{ end }}{{ .UserName }}@{{ .HostName }} ",
+          "type": "session"
         },
         {
           "background": "#3465a4",
